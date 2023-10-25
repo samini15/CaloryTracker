@@ -2,6 +2,7 @@ package com.example.core.navigation
 
 object Route {
     // Onboarding
+    const val ONBOARDING = "ONBOARDING"
     const val WELCOME = "welcome"
     const val AGE = "age"
     const val GENDER = "gender"
