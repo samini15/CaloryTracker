@@ -21,6 +21,7 @@ fun TrackedFoodEntity.toTrackedFood(): TrackedFood =
 
 fun TrackedFood.toTrackedFoodEntity(): TrackedFoodEntity =
     TrackedFoodEntity(
+        id = id,
         name = name,
         carbs = carbs,
         protein = protein,

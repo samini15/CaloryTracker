@@ -7,7 +7,7 @@ import java.time.LocalDate
  * Wrapper class to wrap the data layer entity in the domain layer
  */
 data class TrackedFood(
-    val id: Int,
+    val id: Int = 0,
     val name: String,
     val imageUrl: String?,
     val carbs: Int,
