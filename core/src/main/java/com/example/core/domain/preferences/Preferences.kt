@@ -7,6 +7,15 @@ import com.example.core.domain.model.UserInfo
 
 interface Preferences {
 
+    interface OnboardingPreferences {
+        fun saveShouldShowOnboarding(shouldShow: Boolean)
+        fun loadShouldShowOnboarding(): Boolean
+
+        companion object {
+            const val KEY_SHOULD_SHOW_ONBOARDING = "shouldShowOnboarding"
+        }
+    }
+
     interface UserInfoPreferences {
         fun saveGender(gender: Gender)
         fun saveAge(age: Int)

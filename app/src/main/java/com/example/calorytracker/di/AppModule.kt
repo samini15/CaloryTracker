@@ -3,6 +3,7 @@ package com.example.calorytracker.di
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import com.example.core.data.preferences.OnboardingPreferences
 import com.example.core.data.preferences.UserInfoPreferences
 import com.example.core.domain.preferences.Preferences
 import com.example.core.domain.use_case.FilterOutDigits
@@ -27,6 +28,12 @@ object AppModule {
     @Singleton
     fun provideUserInfoPrefs(sharedPreferences: SharedPreferences): Preferences.UserInfoPreferences =
         UserInfoPreferences(sharedPref = sharedPreferences)
+
+    @Provides
+    @Singleton
+    fun provideOnboardingPrefs(sharedPreferences: SharedPreferences): Preferences.OnboardingPreferences =
+        OnboardingPreferences(sharedPref = sharedPreferences)
+
 
 
     // Use cases
