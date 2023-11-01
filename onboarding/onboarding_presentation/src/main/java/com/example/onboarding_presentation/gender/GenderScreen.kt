@@ -68,8 +68,8 @@ fun GenderScreen(
                     defaultElevation = 10.dp
                 ),
                 colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant
-            )
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                )
             ) {
                 Column(modifier = Modifier.padding(spacing.spaceLarge)) {
                     Text(
