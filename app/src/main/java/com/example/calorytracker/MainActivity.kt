@@ -45,7 +45,8 @@ class MainActivity : ComponentActivity() {
                         startDestination = Route.WELCOME
                     ) {
                         composable(Route.WELCOME) {
-                            WelcomeScreen(onNavigate = navController::navigate)
+                            TrackerOverviewScreen(onNavigate = navController::navigate)
+                            //WelcomeScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.AGE) {
                             AgeScreen(snakbarState = snackbarHostState, onNavigate = navController::navigate)
