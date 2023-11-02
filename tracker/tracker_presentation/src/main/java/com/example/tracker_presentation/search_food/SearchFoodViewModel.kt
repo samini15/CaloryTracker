@@ -43,9 +43,10 @@ class SearchFoodViewModel @Inject constructor(
             SearchFoodEvent.OnSearch -> {
                 executeSearch()
             }
-            is SearchFoodEvent.OnSearchFocusChanged -> {
+            is SearchFoodEvent.OnSearchActiveChanged -> {
                 state = state.copy(
-                    isHintVisible = !event.isFocused && state.searchQuery.isBlank()
+                    isHintVisible = !event.isActive && state.searchQuery.isBlank(),
+                    isSearching = event.isActive
                 )
             }
             is SearchFoodEvent.OnToggleTrackableFood -> {

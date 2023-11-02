@@ -10,9 +10,11 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.calorytracker.navigation.navigate
 import com.example.calorytracker.ui.theme.CaloryTrackerTheme
 import com.example.core.navigation.Route
@@ -24,6 +26,7 @@ import com.example.onboarding_presentation.height.HeightScreen
 import com.example.onboarding_presentation.nutrient_goal.NutrientGoalScreen
 import com.example.onboarding_presentation.weight.WeightScreen
 import com.example.onboarding_presentation.welcome.WelcomeScreen
+import com.example.tracker_presentation.search_food.SearchFoodScreen
 import com.example.tracker_presentation.tracker_overview.TrackerOverviewScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,6 +39,7 @@ class MainActivity : ComponentActivity() {
             CaloryTrackerTheme {
                 val navController = rememberNavController()
                 val snackbarHostState = remember { SnackbarHostState() }
+
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     snackbarHost = { SnackbarHost(snackbarHostState) }
@@ -45,8 +49,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = Route.WELCOME
                     ) {
                         composable(Route.WELCOME) {
-                            TrackerOverviewScreen(onNavigate = navController::navigate)
-                            //WelcomeScreen(onNavigate = navController::navigate)
+                            WelcomeScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.AGE) {
                             AgeScreen(snakbarState = snackbarHostState, onNavigate = navController::navigate)
@@ -70,12 +73,41 @@ class MainActivity : ComponentActivity() {
                             GoalScreen(onNavigate = navController::navigate)
                         }
 
-
                         composable(Route.TRACKER_OVERVIEW) {
                             TrackerOverviewScreen(onNavigate = navController::navigate)
                         }
-                        composable(Route.SEARCH) {
+                        composable(
+                            route = Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",
+                            arguments = listOf(
+                                navArgument("mealName") {
+                                    type = NavType.StringType
+                                },
+                                navArgument("dayOfMonth") {
+                                    type = NavType.IntType
+                                },
+                                navArgument("month") {
+                                    type = NavType.IntType
+                                },
+                                navArgument("year") {
+                                    type = NavType.IntType
+                                }
+                            )
+                        ) {
+                            it.arguments?.apply {
+                                val mealName = getString("mealName")!!
+                                val dayOfMonth = getInt("dayOfMonth")
+                                val month = getInt("month")
+                                val year = getInt("year")
 
+                                SearchFoodScreen(
+                                    snakbarState = snackbarHostState,
+                                    onNavigateUp = { navController.navigateUp() },
+                                    mealName = mealName,
+                                    dayOfMonth = dayOfMonth,
+                                    month = month,
+                                    year = year
+                                )
+                            }
                         }
                     }
                 }
