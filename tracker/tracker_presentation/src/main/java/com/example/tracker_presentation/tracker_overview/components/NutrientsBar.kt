@@ -44,7 +44,7 @@ fun NutrientsBar(
         proteinWidthRatio.animateTo(targetValue = ((protein * 4f) / caloryGoal)) // 1g of protein has 4 calories
     }
     LaunchedEffect(key1 = fat) {
-        fatWidthRatio.animateTo(targetValue = ((fat * 7f) / caloryGoal)) // 1g of fat has 9 calories
+        fatWidthRatio.animateTo(targetValue = ((fat * 9f) / caloryGoal)) // 1g of fat has 9 calories
     }
 
     Canvas(modifier = modifier) {

@@ -35,7 +35,7 @@ import com.example.onboarding_presentation.components.ActionButton
 @Composable
 fun AgeScreen(
     snakbarState: SnackbarHostState,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: AgeViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -44,7 +44,7 @@ fun AgeScreen(
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Navigate -> onNextClick()
                 is UiEvent.ShowSnakbar -> {
                     snakbarState.showSnackbar(message = event.message.asString(context = context))
                 }

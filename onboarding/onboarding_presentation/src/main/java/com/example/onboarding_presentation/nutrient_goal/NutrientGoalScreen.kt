@@ -36,7 +36,7 @@ import com.example.onboarding_presentation.height.HeightViewModel
 @Composable
 fun NutrientGoalScreen(
     snakbarState: SnackbarHostState,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: NutrientGoalViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -45,7 +45,7 @@ fun NutrientGoalScreen(
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> onNavigate(event)
+                is UiEvent.Navigate -> onNextClick()
                 is UiEvent.ShowSnakbar -> {
                     snakbarState.showSnackbar(message = event.message.asString(context = context))
                 }
