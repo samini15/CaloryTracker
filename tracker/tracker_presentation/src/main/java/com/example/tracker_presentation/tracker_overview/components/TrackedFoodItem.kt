@@ -48,7 +48,7 @@ fun TrackedFoodItem(
             .clip(RoundedCornerShape(5.dp))
             .padding(spacing.spaceExtraSmall)
             .shadow(
-                elevation = 1.dp,
+                elevation = 5.dp,
                 shape = RoundedCornerShape(5.dp)
             )
             .background(MaterialTheme.colorScheme.surface)
@@ -58,7 +58,7 @@ fun TrackedFoodItem(
     ) {
         Image(
             modifier = Modifier
-                .fillMaxHeight()
+                .weight(1f)
                 .aspectRatio(1f)
                 .clip(
                     RoundedCornerShape(

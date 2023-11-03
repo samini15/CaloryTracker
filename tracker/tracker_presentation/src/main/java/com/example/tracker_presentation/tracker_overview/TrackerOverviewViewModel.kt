@@ -33,6 +33,7 @@ class TrackerOverviewViewModel @Inject constructor(
     private var getFoodsForDateJob: Job? = null
 
     init {
+        refreshFoods()
         preferences.saveShouldShowOnboarding(shouldShow = false)
     }
 
@@ -73,6 +74,8 @@ class TrackerOverviewViewModel @Inject constructor(
                         } else it
                     }
                 )
+
+            else -> {}
         }
     }
 
