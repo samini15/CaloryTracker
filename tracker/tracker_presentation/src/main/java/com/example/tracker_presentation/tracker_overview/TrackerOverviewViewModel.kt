@@ -60,8 +60,6 @@ class TrackerOverviewViewModel @Inject constructor(
                         } else it
                     }
                 )
-
-            else -> {}
         }
     }
 

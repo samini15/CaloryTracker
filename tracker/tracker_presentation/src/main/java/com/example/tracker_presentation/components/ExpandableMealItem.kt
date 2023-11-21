@@ -3,6 +3,7 @@ package com.example.tracker_presentation.components
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -50,10 +52,12 @@ fun ExpandableMealItem(
             )
         ) {
 
-            Column(modifier = modifier.padding(spacing.spaceSmall)) {
+            Column(modifier = modifier
+                .clickable { onToggleClick() }
+                .padding(spacing.spaceSmall)
+            ) {
                 Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onToggleClick() },
+                    .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(painter = painterResource(id = meal.drawableRes), contentDescription = meal.name.asString(context))
@@ -122,9 +126,5 @@ fun ExpandableMealItem(
         }
         
         Spacer(modifier = Modifier.height(spacing.spaceSmall))
-        
-        /*AnimatedVisibility(visible = meal.isExpanded) {
-            content()
-        }*/
     }
 }

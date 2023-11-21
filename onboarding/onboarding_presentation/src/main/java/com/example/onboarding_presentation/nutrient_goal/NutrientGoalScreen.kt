@@ -1,6 +1,7 @@
 package com.example.onboarding_presentation.nutrient_goal
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,8 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -31,8 +36,8 @@ import com.example.core.util.UiEvent
 import com.example.core_ui.LocalSpacing
 import com.example.core_ui.component.GradientBackgroundBrush
 import com.example.onboarding_presentation.components.ActionButton
-import com.example.onboarding_presentation.height.HeightViewModel
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun NutrientGoalScreen(
     snakbarState: SnackbarHostState,
@@ -41,6 +46,8 @@ fun NutrientGoalScreen(
 ) {
     val context = LocalContext.current
     val spacing = LocalSpacing.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val localFocusManager = LocalFocusManager.current
 
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
@@ -66,6 +73,12 @@ fun NutrientGoalScreen(
             )
         )
         .padding(spacing.spaceLarge)
+        .pointerInput(Unit) {
+            detectTapGestures(onTap = {
+                keyboardController?.hide()
+                localFocusManager.clearFocus()
+            })
+        }
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
